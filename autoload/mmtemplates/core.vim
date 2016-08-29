@@ -385,20 +385,23 @@ function! s:LiteralReplacement ( text, remove, insert, flag )
 endfunction
 " -----------------------------------------------------------------------------
 "
-"----------------------------------------------------------------------
-"  s:ConcatNormalizedFilename : Concatenate and normalize a filename.   {{{2
-"----------------------------------------------------------------------
+" s:ConcatNormalizedFilename
+" --------------------------
+"
+" Concatenate and normalize a filename
+"
+" @param (...)
 "
 function! s:ConcatNormalizedFilename ( ... )
-	if a:0 == 1
-		let filename = ( a:1 )
-	elseif a:0 == 2
-		let filename = ( a:1 ).'/'.( a:2 )
-	endif
-	return fnamemodify( filename, ':p' )
-endfunction    " ----------  end of function s:ConcatNormalizedFilename  ----------
+  if a:0 == 1
+    let filename = ( a:1 )
+  elseif a:0 == 2
+    let filename = ( a:1 ).'/'.( a:2 )
+  endif
+  return fnamemodify( filename, ':p' )
+endfunction
+" -----------------------------------------------------------------------------
 "
-"----------------------------------------------------------------------
 "  s:GetNormalizedPath : Split and normalize a path.   {{{2
 "----------------------------------------------------------------------
 "
