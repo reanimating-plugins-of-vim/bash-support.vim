@@ -1,14 +1,14 @@
 "===============================================================================
 "
 "          File:  mmtemplates#core.vim
-" 
+"
 "   Description:  Template engine: Core.
 "
 "                 Maps & Menus - Template Engine
-" 
+"
 "   VIM Version:  7.0+
 "        Author:  Wolfgang Mehner, wolfgang-mehner@web.de
-"  Organization:  
+"  Organization:
 "       Version:  see variable g:Templates_Version below
 "       Created:  30.08.2011
 "      Revision:  28.03.2014
