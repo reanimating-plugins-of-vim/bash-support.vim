@@ -283,44 +283,36 @@ function! s:UpdateFileReadRegex ( regex, settings )
 endfunction
 " -----------------------------------------------------------------------------
 "
+" s:UpdateTemplateRegex
+" ---------------------
 "
-"----------------------------------------------------------------------
-"  s:UpdateTemplateRegex : Update the regular expressions.   {{{2
-"----------------------------------------------------------------------
+" Update the regular expressions.
+"
+" @param regex
+" @param settings
 "
 function! s:UpdateTemplateRegex ( regex, settings )
-	"
-	let quote = '["'']'
-	"
-	" Function Arguments
-	let a:regex.RemoveQuote  = '^\s*'.quote.'\zs.*\ze'.quote.'\s*$'
-	"
-	" Basics
-	let a:regex.MacroStart   = a:settings.MacroStart
-	let a:regex.MacroEnd     = a:settings.MacroEnd
-	let a:regex.MacroName    = a:settings.MacroName
-	let a:regex.MacroNameC   = '\('.a:settings.MacroName.'\)'
-	let a:regex.MacroMatch   = '^'.a:settings.MacroStart.a:settings.MacroName.a:settings.MacroEnd.'$'
-	"
-	" Syntax Categories
-	let a:regex.FunctionLine    = '^'.a:settings.MacroStart.'\('.a:regex.MacroNameC.'(\(.*\))\)'.a:settings.MacroEnd.'\s*\n'
-	let a:regex.FunctionChecked = '^'.a:regex.MacroNameC.'(\(.*\))$'
-	let a:regex.FunctionList    = '^LIST(\(.\{-}\))$'
-	let a:regex.FunctionComment = a:settings.MacroStart.'\(C\|Comment\)'.'(\(.\{-}\))'.a:settings.MacroEnd
-	let a:regex.FunctionInsert  = a:settings.MacroStart.'\(Insert\|InsertLine\)'.'(\(.\{-}\))'.a:settings.MacroEnd
-	let a:regex.MacroRequest    = a:settings.MacroStart.'?'.a:regex.MacroNameC.'\%(:\(\a\)\)\?'.a:settings.MacroEnd
-	let a:regex.MacroInsert     = a:settings.MacroStart.''.a:regex.MacroNameC.'\%(:\(\a\)\)\?'.a:settings.MacroEnd
-	let a:regex.MacroNoCapture  = a:settings.MacroStart.a:settings.MacroName.'\%(:\a\)\?'.a:settings.MacroEnd
-	let a:regex.ListItem        = a:settings.MacroStart.''.a:regex.MacroNameC.':ENTRY_*'.a:settings.MacroEnd
-	"
-	let a:regex.TextBlockFunctions = '^\%(C\|Comment\|Insert\|InsertLine\)$'
-	"
-	" Jump Tags
-	let a:regex.JumpTagBoth     = '<-\w*->\|{-\w*-}\|<+\w*+>\|{+\w*+}'
-	let a:regex.JumpTagType2    = '<-\w*->\|{-\w*-}'
-	"
-endfunction    " ----------  end of function s:UpdateTemplateRegex  ----------
-" }}}2
+  let quote = '["'']'
+  let a:regex.RemoveQuote        = '^\s*'.quote.'\zs.*\ze'.quote.'\s*$'
+  let a:regex.MacroStart         = a:settings.MacroStart
+  let a:regex.MacroEnd           = a:settings.MacroEnd
+  let a:regex.MacroName          = a:settings.MacroName
+  let a:regex.MacroNameC         = '\('.a:settings.MacroName.'\)'
+  let a:regex.MacroMatch         = '^'.a:settings.MacroStart.a:settings.MacroName.a:settings.MacroEnd.'$'
+  let a:regex.FunctionLine       = '^'.a:settings.MacroStart.'\('.a:regex.MacroNameC.'(\(.*\))\)'.a:settings.MacroEnd.'\s*\n'
+  let a:regex.FunctionChecked    = '^'.a:regex.MacroNameC.'(\(.*\))$'
+  let a:regex.FunctionList       = '^LIST(\(.\{-}\))$'
+  let a:regex.FunctionComment    = a:settings.MacroStart.'\(C\|Comment\)'.'(\(.\{-}\))'.a:settings.MacroEnd
+  let a:regex.FunctionInsert     = a:settings.MacroStart.'\(Insert\|InsertLine\)'.'(\(.\{-}\))'.a:settings.MacroEnd
+  let a:regex.MacroRequest       = a:settings.MacroStart.'?'.a:regex.MacroNameC.'\%(:\(\a\)\)\?'.a:settings.MacroEnd
+  let a:regex.MacroInsert        = a:settings.MacroStart.''.a:regex.MacroNameC.'\%(:\(\a\)\)\?'.a:settings.MacroEnd
+  let a:regex.MacroNoCapture     = a:settings.MacroStart.a:settings.MacroName.'\%(:\a\)\?'.a:settings.MacroEnd
+  let a:regex.ListItem           = a:settings.MacroStart.''.a:regex.MacroNameC.':ENTRY_*'.a:settings.MacroEnd
+  let a:regex.TextBlockFunctions = '^\%(C\|Comment\|Insert\|InsertLine\)$'
+  let a:regex.JumpTagBoth        = '<-\w*->\|{-\w*-}\|<+\w*+>\|{+\w*+}'
+  let a:regex.JumpTagType2       = '<-\w*->\|{-\w*-}'
+endfunction
+" -----------------------------------------------------------------------------
 "
 "----------------------------------------------------------------------
 "  === Script: Auxiliary Functions ===   {{{1
