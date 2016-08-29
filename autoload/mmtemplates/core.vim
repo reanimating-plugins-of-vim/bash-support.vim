@@ -318,21 +318,26 @@ endfunction
 "  === Script: Auxiliary Functions ===   {{{1
 "----------------------------------------------------------------------
 "
-"----------------------------------------------------------------------
-"  s:ParameterTypes : Get the types of the arguments.   {{{2
+"------------------------------------------------------------------------------
 "
-"  Returns a string with one character per argument, denoting the type.
-"  Uses the codebook 's:TypeNames'.
+" s:ParameterTypes
+" ----------------
 "
-"  Examples:
-"  - s:ParameterTypes ( 1, "string", [] ) -> "isl"
-"  - s:ParameterTypes ( 1, 'string', {} ) -> "isd"
-"  - s:ParameterTypes ( 1, 1.0 )          -> "in"
-"----------------------------------------------------------------------
+" Get the types of the arguments
+"
+" @return (string) returns a string with one character per argument, denoting the type
+"
+" Uses the codebook 's:TypeNames'
+"
+" Examples:
+" - s:ParameterTypes ( 1, "string", [] ) -> "isl"
+" - s:ParameterTypes ( 1, 'string', {} ) -> "isd"
+" - s:ParameterTypes ( 1, 1.0 )          -> "in"
 "
 function! s:ParameterTypes ( ... )
-	return join( map( copy( a:000 ), 's:TypeNames[ type ( v:val ) ]' ), '' )
-endfunction    " ----------  end of function s:ParameterTypes  ----------
+  return join( map( copy( a:000 ), 's:TypeNames[ type ( v:val ) ]' ), '' )
+endfunction
+" -----------------------------------------------------------------------------
 "
 "----------------------------------------------------------------------
 "  s:FunctionCheck : Check the syntax, name and parameter types.   {{{2
