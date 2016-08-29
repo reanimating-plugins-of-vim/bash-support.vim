@@ -12,15 +12,18 @@ The help file online: http://lug.fh-swf.de/vim/vim-bash/bashsupport.html
 
 The key mappings of this plugin (PDF): http://lug.fh-swf.de/vim/vim-bash/bash-hotkeys.pdf
 
+
 DOCUMENTATION
---------------------------------------------------------
+-------------
 
 This plugin comes with a help file (bashsupport.txt).
 Read it with
 
-  :h bashsupport
+~~~
+:h bashsupport
+~~~
 
-** PLEASE READ THE DOCUMENTATION **
+** **PLEASE READ THE DOCUMENTATION** **
 
 Editing actions differ for different modes!
 There are  a lot of  features which can be configured or customized to match your needs.
@@ -31,23 +34,29 @@ The installation explained: http://www.thegeekstuff.com article
 
 Plugin featured in the  linux.com article 'Turn Vim into a bash IDE' : http://www.linux.com/articles/114359
 
+
 GitHub
---------------------------------------------------------
+------
 
 Bash Support is on GitHub:
 
-      https://github.com/WolfgangMehner/vim-plugins
+~~~
+https://github.com/WolfgangMehner/vim-plugins
+~~~
 
-(Please help us keep track of all the issues and name your report/request "Bash-Support: <title>") 
+(Please help us keep track of all the issues and name your report/request "Bash-Support:")
+
 
 MAILING LIST
---------------------------------------------------------
+------------
+
 You can subscribe to the vim-plugins-list mailing list to post your questions or
 suggestions for improvement or to report bugs.  The list will also be used to
 announce new releases ( c.vim / bash-support / perl-support / doxygen-support ).
 Visit the following page for subscribing to the mailing list:
 
-  http://lug.fh-swf.de/cgi-bin/mailman/listinfo/vim-plugins-list
+~~~
+http://lug.fh-swf.de/cgi-bin/mailman/listinfo/vim-plugins-list
+~~~
 
 The vim-plugins-list list is very low on traffic.
-
