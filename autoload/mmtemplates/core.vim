@@ -339,35 +339,36 @@ function! s:ParameterTypes ( ... )
 endfunction
 " -----------------------------------------------------------------------------
 "
-"----------------------------------------------------------------------
-"  s:FunctionCheck : Check the syntax, name and parameter types.   {{{2
+" s:FunctionCheck
+" ---------------
 "
-"  Throw a 'Template:Check:*' exception whenever:
-"  - The syntax of the call "name( params )" is wrong.
-"  - The function name 'name' is not a key in 'namespace'.
-"  - The parameter string (as produced by s:ParameterTypes) does not match
-"    the regular expression found in "namespace[name]".
-"----------------------------------------------------------------------
+" Check the syntax, name and parameter types
+"
+" Throw a 'Template:Check:*' exception whenever:
+" - The syntax of the call "name( params )" is wrong
+" - The function name 'name' is not a key in 'namespace'
+" - The parameter string (as produced by s:ParameterTypes) does not match the regular expression found in "namespace[name]"
+"
+" @param name
+" @param param
+" @param namespace
 "
 function! s:FunctionCheck ( name, param, namespace )
-	"
-	" check the syntax and get the parameter string
-	try
-		exe 'let param_s = s:ParameterTypes( '.a:param.' )'
-	catch /^Vim(let):E\d\+:/
-		throw 'Template:Check:function call "'.a:name.'('.a:param.')": '.matchstr ( v:exception, '^Vim(let):E\d\+:\zs.*' )
-	endtry
-	"
-	" check the function and the parameters
-	if ! has_key ( a:namespace, a:name )
-		throw 'Template:Check:unknown function: "'.a:name.'"'
-	elseif param_s !~ '^'.a:namespace[ a:name ].'$'
-		throw 'Template:Check:wrong parameter types: "'.a:name.'"'
-	endif
-	"
-endfunction    " ----------  end of function s:FunctionCheck  ----------
+  try
+    exe 'let param_s = s:ParameterTypes( '.a:param.' )'
+  catch /^Vim(let):E\d\+:/
+    throw 'Template:Check:function call "'.a:name.'('.a:param.')": '.matchstr ( v:exception, '^Vim(let):E\d\+:\zs.*' )
+  endtry
+
+  if ! has_key ( a:namespace, a:name )
+    throw 'Template:Check:unknown function: "'.a:name.'"'
+  elseif param_s !~ '^'.a:namespace[ a:name ].'$'
+    throw 'Template:Check:wrong parameter types: "'.a:name.'"'
+  endif
+endfunction
+" -----------------------------------------------------------------------------
 "
-"----------------------------------------------------------------------
+"
 "  s:LiteralReplacement : Substitute without using regular expressions.   {{{2
 "----------------------------------------------------------------------
 "
