@@ -37,24 +37,27 @@ endif
 "
 let g:BASH_Version= "4.2.1"                  " version number of this script; do not change
 "
-"===  FUNCTION  ================================================================
-"          NAME:  BASH_SetGlobalVariable     {{{1
-"   DESCRIPTION:  Define a global variable and assign a default value if nor
-"                 already defined
-"    PARAMETERS:  name - global variable
-"                 default - default value
-"===============================================================================
+" -----------------------------------------------------------------------------
+"
+" s:BASH_SetGlobalVariable
+" ------------------------
+"
+" Define a global variable and assign a default value if nor already defined
+"
+" @param name global variable name
+" @param default variable value
+"
 function! s:BASH_SetGlobalVariable ( name, default )
   if !exists('g:'.a:name)
-    exe 'let g:'.a:name."  = '".a:default."'"
-	else
-		" check for an empty initialization
-		exe 'let	val	= g:'.a:name
-		if empty(val)
-			exe 'let g:'.a:name."  = '".a:default."'"
-		endif
+    exe 'let g:'.a:name." = '".a:default."'"
+  else
+    exe 'let val = g:'.a:name
+    if empty(val)
+      exe 'let g:'.a:name." = '".a:default."'"
+    endif
   endif
-endfunction   " ---------- end of function  s:BASH_SetGlobalVariable  ----------
+endfunction
+" -----------------------------------------------------------------------------
 "
 "===  FUNCTION  ================================================================
 "          NAME:  GetGlobalSetting     {{{1
