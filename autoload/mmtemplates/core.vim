@@ -68,37 +68,40 @@ elseif exists('g:Templates_VersionSearch')
 	"
 else
 	"
-	"-------------------------------------------------------------------------------
-	" s:VersionComp : Compare two version numbers.   {{{3
-	"
-	" Parameters:
-	"   op1 - first version number (string)
-	"   op2 - second version number (string)
-	" Returns:
-	"   result - -1, 0 or 1, to the specifications of sort() (integer)
-	"-------------------------------------------------------------------------------
-	function! s:VersionComp ( op1, op2 )
-		"
-		let l1 = split ( a:op1, '[.-]' )
-		let l2 = split ( a:op2, '[.-]' )
-		"
-		for i in range( 0, max( [ len( l1 ), len( l2 ) ] ) - 1 )
-			" until now, all fields where equal
-			if len ( l2 ) <= i
-				return -1                               " op1 has more fields -> sorts first
-			elseif len( l1 ) <= i
-				return 1                                " op2 has more fields -> sorts first
-			elseif str2nr ( l1[i] ) > str2nr ( l2[i] )
-				return -1                               " op1 is larger here -> sorts first
-			elseif str2nr ( l2[i] ) > str2nr ( l1[i] )
-				return 1                                " op2 is larger here -> sorts first
-			endif
-		endfor
-		"
-		return 0                                    " same amount of fields, all equal
-	endfunction    " ----------  end of function s:VersionComp  ----------
-	" }}}3
-	"-------------------------------------------------------------------------------
+  "----------------------------------------------------------------------------
+  "
+  " s:VersionComp : Compare two version numbers
+  " -------------------------------------------
+  "
+  " @param op1 (string) first version number
+  " @param op2 (string) second version number
+  "
+  " @return (integer) -1, 0 or 1, to the specifications of sort()
+  "
+  " #1 - until now, all fields where equal
+  " #2 - op1 has more fields -> sorts first
+  " #3 - op2 has more fields -> sorts first
+  " #4 - op1 is larger here -> sorts first
+  " #5 - op2 is larger here -> sorts first
+  " #6 - same amount of fields, all equal
+  "
+  function! s:VersionComp ( op1, op2 )
+    let l1 = split ( a:op1, '[.-]' )
+    let l2 = split ( a:op2, '[.-]' )
+    for i in range( 0, max( [ len( l1 ), len( l2 ) ] ) - 1 )
+      if len ( l2 ) <= i " #1
+        return -1 " #2
+      elseif len( l1 ) <= i
+        return 1 " #3
+      elseif str2nr ( l1[i] ) > str2nr ( l2[i] )
+        return -1 " #4
+      elseif str2nr ( l2[i] ) > str2nr ( l1[i] )
+        return 1 " #5
+      endif
+    endfor
+    return 0 " #6
+  endfunction
+  "----------------------------------------------------------------------------
 	"
 	try
 		"
