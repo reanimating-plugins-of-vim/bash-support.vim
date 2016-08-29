@@ -71,7 +71,7 @@ else
   "----------------------------------------------------------------------------
   "
   " s:VersionComp
-  " -------------------------------------------
+  " -------------
   "
   " Compare two version numbers
   "
@@ -368,16 +368,22 @@ function! s:FunctionCheck ( name, param, namespace )
 endfunction
 " -----------------------------------------------------------------------------
 "
+" s:LiteralReplacement
+" --------------------
 "
-"  s:LiteralReplacement : Substitute without using regular expressions.   {{{2
-"----------------------------------------------------------------------
+" Substitute without using regular expressions
+"
+" @param text
+" @param remove
+" @param insert
+" @param flag
+"
+" @return ()
 "
 function! s:LiteralReplacement ( text, remove, insert, flag )
-	return substitute( a:text,
-				\ '\V'.escape( a:remove, '\' ),
-				\      escape( a:insert, '\&~' ), a:flag )
-"				\ '\='.string( a:insert      ), a:flag )
-endfunction    " ----------  end of function s:LiteralReplacement  ----------
+  return substitute( a:text, '\V'.escape( a:remove, '\' ), escape( a:insert, '\&~' ), a:flag )
+endfunction
+" -----------------------------------------------------------------------------
 "
 "----------------------------------------------------------------------
 "  s:ConcatNormalizedFilename : Concatenate and normalize a filename.   {{{2
