@@ -70,8 +70,10 @@ else
 	"
   "----------------------------------------------------------------------------
   "
-  " s:VersionComp : Compare two version numbers
+  " s:VersionComp
   " -------------------------------------------
+  "
+  " Compare two version numbers
   "
   " @param op1 (string) first version number
   " @param op2 (string) second version number
@@ -241,58 +243,46 @@ let s:RegexSettings = {
 			\ }
 "
 "----------------------------------------------------------------------
-"  s:UpdateFileReadRegex : Update the regular expressions.   {{{2
-"----------------------------------------------------------------------
+"
+" s:UpdateFileReadRegex
+" -------------------------------------------------------
+"
+" Update the regular expressions.
+"
+" @param regex
+" @param settings
+"
+" @return
 "
 function! s:UpdateFileReadRegex ( regex, settings )
-	"
-	let quote = '\(["'']\?\)'
-	"
-	" Basics
-	let a:regex.MacroName     = a:settings.MacroName
-	let a:regex.MacroNameC    = '\('.a:settings.MacroName.'\)'
-	let a:regex.TemplateNameC = '\('.a:settings.TemplateName.'\)'
-	let a:regex.Mapping       = a:settings.Mapping
-	let a:regex.AbsolutePath  = '^[\~/]'                " TODO: Is that right and/or complete?
-	"
-	" Syntax Categories
-	let a:regex.EmptyLine     = '^\s*$'
-	let a:regex.CommentLine   = '^'.a:settings.CommentStart
-	let a:regex.FunctionCall  = '^\s*'.a:regex.MacroNameC.'\s*(\(.*\))\s*$'
-	let a:regex.MacroAssign   = '^\s*'.a:settings.MacroStart.a:regex.MacroNameC.a:settings.MacroEnd
-				\                    .'\s*=\s*'.quote.'\(.\{-}\)'.'\2'.'\s*$'   " deprecated
-	"
-	" Blocks
-	let delim                 = a:settings.BlockDelimiter
-	let a:regex.Styles1Start  = '^'.delim.'\s*IF\s\+|STYLE|\s\+IS\s\+'.a:regex.MacroNameC.'\s*'.delim
-	let a:regex.Styles1End    = '^'.delim.'\s*ENDIF\s*'.delim
-
-	let a:regex.Styles2Start  = '^'.delim.'\s*USE\s\+STYLES\s*:'
-				\                     .'\s*\('.a:settings.MacroList.'\)'.'\s*'.delim
-	let a:regex.Styles2End    = '^'.delim.'\s*ENDSTYLES\s*'.delim
-	"
-	" Texts
-	let a:regex.TemplateStart = '^'.delim.'\s*\%(TEMPLATE:\)\?\s*'.a:regex.TemplateNameC.'\s*'.delim
-				\                     .'\s*\%(\('.a:settings.TextOpt.'\)\s*'.delim.'\)\?'
-	let a:regex.TemplateEnd   = '^'.delim.'\s*ENDTEMPLATE\s*'.delim
-	"
-	let a:regex.HelpStart     = '^'.delim.'\s*HELP:\s*'.a:regex.TemplateNameC.'\s*'.delim
-				\                     .'\s*\%(\('.a:settings.TextOpt.'\)\s*'.delim.'\)\?'
-	"let a:regex.HelpEnd       = '^'.delim.'\s*ENDHELP\s*'.delim
-	"
-	let a:regex.MenuSep       = '^'.delim.'\s*SEP:\s*'.a:regex.TemplateNameC.'\s*'.delim
-	"
-	let a:regex.ListStart     = '^'.delim.'\s*LIST:\s*'.a:regex.MacroNameC.'\s*'.delim
-				\                     .'\s*\%(\('.a:settings.TextOpt.'\)\s*'.delim.'\)\?'
-	let a:regex.ListEnd       = '^'.delim.'\s*ENDLIST\s*'.delim
-	"
-	" Special Hints
-	let a:regex.CommentHint   = a:settings.CommentHint
-	let a:regex.CommandHint   = a:settings.CommandHint
-	let a:regex.DelimHint     = a:settings.DelimHint
-	let a:regex.MacroHint     = a:settings.MacroHint
-	"
-endfunction    " ----------  end of function s:UpdateFileReadRegex  ----------
+  let quote = '\(["'']\?\)'
+  let a:regex.MacroName     = a:settings.MacroName
+  let a:regex.MacroNameC    = '\('.a:settings.MacroName.'\)'
+  let a:regex.TemplateNameC = '\('.a:settings.TemplateName.'\)'
+  let a:regex.Mapping       = a:settings.Mapping
+  let a:regex.AbsolutePath  = '^[\~/]' " TODO: Is that right and/or complete?
+  let a:regex.EmptyLine     = '^\s*$'
+  let a:regex.CommentLine   = '^'.a:settings.CommentStart
+  let a:regex.FunctionCall  = '^\s*'.a:regex.MacroNameC.'\s*(\(.*\))\s*$'
+  let a:regex.MacroAssign   = '^\s*'.a:settings.MacroStart.a:regex.MacroNameC.a:settings.MacroEnd.'\s*=\s*'.quote.'\(.\{-}\)'.'\2'.'\s*$' " deprecated
+  let delim                 = a:settings.BlockDelimiter
+  let a:regex.Styles1Start  = '^'.delim.'\s*IF\s\+|STYLE|\s\+IS\s\+'.a:regex.MacroNameC.'\s*'.delim
+  let a:regex.Styles1End    = '^'.delim.'\s*ENDIF\s*'.delim
+  let a:regex.Styles2Start  = '^'.delim.'\s*USE\s\+STYLES\s*:'.'\s*\('.a:settings.MacroList.'\)'.'\s*'.delim
+  let a:regex.Styles2End    = '^'.delim.'\s*ENDSTYLES\s*'.delim
+  let a:regex.TemplateStart = '^'.delim.'\s*\%(TEMPLATE:\)\?\s*'.a:regex.TemplateNameC.'\s*'.delim.'\s*\%(\('.a:settings.TextOpt.'\)\s*'.delim.'\)\?'
+  let a:regex.TemplateEnd   = '^'.delim.'\s*ENDTEMPLATE\s*'.delim
+  let a:regex.HelpStart     = '^'.delim.'\s*HELP:\s*'.a:regex.TemplateNameC.'\s*'.delim.'\s*\%(\('.a:settings.TextOpt.'\)\s*'.delim.'\)\?'
+  let a:regex.MenuSep       = '^'.delim.'\s*SEP:\s*'.a:regex.TemplateNameC.'\s*'.delim
+  let a:regex.ListStart     = '^'.delim.'\s*LIST:\s*'.a:regex.MacroNameC.'\s*'.delim.'\s*\%(\('.a:settings.TextOpt.'\)\s*'.delim.'\)\?'
+  let a:regex.ListEnd       = '^'.delim.'\s*ENDLIST\s*'.delim
+  let a:regex.CommentHint   = a:settings.CommentHint
+  let a:regex.CommandHint   = a:settings.CommandHint
+  let a:regex.DelimHint     = a:settings.DelimHint
+  let a:regex.MacroHint     = a:settings.MacroHint
+endfunction
+" -----------------------------------------------------------------------------
+"
 "
 "----------------------------------------------------------------------
 "  s:UpdateTemplateRegex : Update the regular expressions.   {{{2
